@@ -12,7 +12,7 @@ public class GestorArboles {
 	private static final String BBDD = "primera";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "";
-	public static void run() {
+	public static void run() throws ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		String url="jdbc:mysql://" + HOST + "/" + BBDD;
 		Connection con = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -37,19 +37,15 @@ public class GestorArboles {
 				st.execute("INSERT INTO `arboles`( `nombre_comun`, `nombre_cientifico`, `habitat`, `altura`, `origen`) VALUES ('"+partes[1]+"','"+partes[2]+"','"+partes[3]+"','"+partes[4]+"','"+partes[5]+"')");
 				} catch (SQLException e) {
 					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
 				}
 			}
 			case 2: {
 				try {
 				System.out.println("insertar árbol \" int id a eliminar \"");
-				partes[0]=scan.nextLine();
+				partes=scan.nextLine().split(",");
 				String sentDELETE="DELETE FROM arboles WHERE id ='"+partes[0]+"'";
 				st.executeUpdate(sentDELETE);
 				} catch (SQLException e) {
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 			}
@@ -60,8 +56,6 @@ public class GestorArboles {
 				String sentUpdate="UPDATE arboles SET `nombre_comun`='"+partes[1]+"',`nombre_cientifico`='"+partes[2]+"',`habitat`='"+partes[3]+"',`altura`='"+partes[4]+"',`origen`='"+partes[5]+"' WHERE id='"+partes[0]+"'";
 				st.executeUpdate(sentUpdate);
 				} catch (SQLException e) {
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 			}
@@ -74,15 +68,17 @@ public class GestorArboles {
 				}
 				} catch (SQLException e) {
 					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
 				}
 			}
 			case 5: {
-
+				System.out.println("seguro s / n");
+				partes=scan.nextLine().split(",");
+				if(partes[0]=="n") {
+					opciones=4;
+				}
 			}
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + key);
+				throw new IllegalArgumentException("Unexpected value: " + opciones);
 			}
 		} while (opciones != 5);
 	}
