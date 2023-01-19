@@ -12,7 +12,7 @@ public class GestorArboles {
 	private static final String BBDD = "primera";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "";
-	public static void run() throws ClassNotFoundException {
+	public static void run() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		String url="jdbc:mysql://" + HOST + "/" + BBDD;
 		Connection con = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -74,12 +74,16 @@ public class GestorArboles {
 				System.out.println("seguro s / n");
 				partes=scan.nextLine().split(",");
 				if(partes[0]=="n") {
-					opciones=4;
+				opciones=4;
+				}
+				if(partes[0]=="s") {
+				scan.close();
 				}
 			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + opciones);
 			}
 		} while (opciones != 5);
+		
 	}
 }
