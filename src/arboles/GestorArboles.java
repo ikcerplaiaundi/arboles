@@ -45,7 +45,7 @@ public class GestorArboles {
 				System.out.println("insertar árbol int id, String nombreComun,String nombreCientifuico,String habitat,int altura,String origen");
 				partes=scan.nextLine().split(",");
 				//st.execute("INSERT INTO `arboles`( `nombre_comun`, `nombre_cientifico`, `habitat`, `altura`, `origen`) VALUES ('"+partes[1]+"','"+partes[2]+"','"+partes[3]+"','"+partes[4]+"','"+partes[5]+"')");
-				preparedSt = con.prepareStatement("INSERT INTO animales (nombre) VALUES (?,?,?,?,?)");
+				preparedSt = con.prepareStatement("INSERT INTO arboles ( `nombre_comun`, `nombre_cientifico`, `habitat`, `altura`, `origen`) VALUES (?,?,?,?,?)");
 				preparedSt.setString(1,partes[0]);
 				preparedSt.setString(2,partes[1]);
 				preparedSt.setString(3,partes[2]);
@@ -76,12 +76,12 @@ public class GestorArboles {
 				//String sentUpdate="UPDATE arboles SET `nombre_comun`='"+partes[1]+"',`nombre_cientifico`='"+partes[2]+"',`habitat`='"+partes[3]+"',`altura`='"+partes[4]+"',`origen`='"+partes[5]+"' WHERE id='"+partes[0]+"'";
 				//st.executeUpdate(sentUpdate);
 				
-				preparedSt = con.prepareStatement("UPDATE arboles SET (?,?,?,?,?)");
-				preparedSt.setString(1,partes[0]);
-				preparedSt.setString(2,partes[1]);
-				preparedSt.setString(3,partes[2]);
-				preparedSt.setInt(4, Integer.parseInt(partes[3]));
-				preparedSt.setString(5,partes[4]);
+				preparedSt = con.prepareStatement("UPDATE arboles SET nombre_comun='?',nombre_cientifico='?',habitat='?',altura='?',origen='?'  WERE id='?'");
+				preparedSt.setString(1,partes[1]);
+				preparedSt.setString(2,partes[2]);
+				preparedSt.setString(3,partes[3]);
+				preparedSt.setInt(4, Integer.parseInt(partes[4]));
+				preparedSt.setString(5,partes[0]);
 				
 				preparedSt.execute();
 				
