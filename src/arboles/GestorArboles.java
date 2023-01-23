@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 public class GestorArboles {
+	private static final int MODIFICAR = 3;
+	
 	private static final String HOST = "localhost";
 	private static final String BBDD = "primera";
 	private static final String USERNAME = "root";
@@ -50,6 +52,8 @@ public class GestorArboles {
 				preparedSt.setInt(4, Integer.parseInt(partes[3]));
 				preparedSt.setString(5,partes[4]);
 				
+				preparedSt.execute();
+				
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -65,20 +69,21 @@ public class GestorArboles {
 					e.printStackTrace();
 				}
 			}
-			case 3: {
+			case MODIFICAR: {
 				try {
 				System.out.println("insertar árbol int id, String nombreComun,String nombreCientifuico,String habitat,int altura,String origen");
 				partes=scan.nextLine().split(",");
 				//String sentUpdate="UPDATE arboles SET `nombre_comun`='"+partes[1]+"',`nombre_cientifico`='"+partes[2]+"',`habitat`='"+partes[3]+"',`altura`='"+partes[4]+"',`origen`='"+partes[5]+"' WHERE id='"+partes[0]+"'";
 				//st.executeUpdate(sentUpdate);
 				
-				preparedSt = con.prepareStatement("INSERT INTO animales (nombre) VALUES (?,?,?,?,?)");
+				preparedSt = con.prepareStatement("UPDATE arboles SET (?,?,?,?,?)");
+				preparedSt.setString(1,partes[0]);
+				preparedSt.setString(2,partes[1]);
+				preparedSt.setString(3,partes[2]);
+				preparedSt.setInt(4, Integer.parseInt(partes[3]));
+				preparedSt.setString(5,partes[4]);
 				
-				preparedSt.executeUpdate(partes[0],1);
-				preparedSt.executeUpdate(partes[1],2);
-				preparedSt.executeUpdate(partes[2],3);
-				preparedSt.executeUpdate(partes[3],4);
-				preparedSt.executeUpdate(partes[4],5);
+				preparedSt.execute();
 				
 				} catch (SQLException e) {
 					e.printStackTrace();
