@@ -71,7 +71,7 @@ public class GestorArboles {
 				}
 			}
 			case 5: {
-				System.out.println("seguro s / n");
+				System.out.println("seguro? s / n");
 				partes=scan.nextLine().split(",");
 				if(partes[0]=="n") {
 				opciones=4;
