@@ -9,7 +9,10 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 public class GestorArboles {
+	private static final int VISUALIZAR = 4;
 	private static final int MODIFICAR = 3;
+	private static final int DELETE = 2;
+	private static final int INSERTAR = 1;
 	
 	private static final String HOST = "localhost";
 	private static final String BBDD = "primera";
@@ -39,8 +42,10 @@ public class GestorArboles {
 					+ "5 salir");
 			opciones = 0;
 			opciones = Integer.parseInt(scan.nextLine());
+			
+			
 			switch (opciones) {
-			case 1: {
+			case INSERTAR: {
 				try {
 				System.out.println("insertar árbol int id, String nombreComun,String nombreCientifuico,String habitat,int altura,String origen");
 				partes=scan.nextLine().split(",");
@@ -58,7 +63,7 @@ public class GestorArboles {
 					e.printStackTrace();
 				}
 			}
-			case 2: {
+			case DELETE: {
 				try {
 				System.out.println("insertar árbol \" int id a eliminar \"");
 				partes=scan.nextLine().split(",");
@@ -77,8 +82,8 @@ public class GestorArboles {
 				//st.executeUpdate(sentUpdate);
 				
 				preparedSt = con.prepareStatement("UPDATE arboles SET nombre_comun='?',nombre_cientifico='?',habitat='?',altura='?',origen='?'  WERE id='?'");
-				preparedSt.setString(1,partes[1]);
-				preparedSt.setString(2,partes[2]);
+				preparedSt.setString(INSERTAR,partes[INSERTAR]);
+				preparedSt.setString(DELETE,partes[DELETE]);
 				preparedSt.setString(3,partes[3]);
 				preparedSt.setInt(4, Integer.parseInt(partes[4]));
 				preparedSt.setString(5,partes[0]);
@@ -89,7 +94,7 @@ public class GestorArboles {
 					e.printStackTrace();
 				}
 			}
-			case 4: {
+			case VISUALIZAR: {
 				try {
 				String sentSELECT="SELECT * FROM `arboles` WHERE 1";
 				ResultSet resultado=st.executeQuery(sentSELECT);
